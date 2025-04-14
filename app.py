@@ -4,7 +4,7 @@ import time
 import pygame
 pygame.init()
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 1280, 720
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Aim Trainer")
@@ -18,7 +18,7 @@ BG_COLOR = (0, 25, 40)
 LIVES = 3
 TOP_BAR_HEIGHT = 50
 
-LABEL_FONT = pygame.font.SysFont("comicsans", 24)
+LABEL_FONT = pygame.font.SysFont(None, 36)
 
 
 class Target:
@@ -88,23 +88,30 @@ def draw_top_bar(win, elapsed_time, targets_pressed, misses):
     win.blit(lives_label, (650, 5))
 
 
+
 def end_screen(win, elapsed_time, targets_pressed, clicks):
     win.fill(BG_COLOR)
     time_label = LABEL_FONT.render(
-        f"Time: {format_time(elapsed_time)}", 1, "white")
+        f"Time: {format_time(elapsed_time)}", 1, "yellow")
 
     speed = round(targets_pressed / elapsed_time, 1)
-    speed_label = LABEL_FONT.render(f"Speed: {speed} t/s", 1, "white")
+    speed_label = LABEL_FONT.render(f"Speed: {speed} t/s", 1, "red")
 
-    hits_label = LABEL_FONT.render(f"Hits: {targets_pressed}", 1, "white")
+    hits_label = LABEL_FONT.render(f"Hits: {targets_pressed}", 1, "green")
 
     accuracy = round(targets_pressed / clicks * 100, 1)
-    accuracy_label = LABEL_FONT.render(f"Accuracy: {accuracy}%", 1, "white")
+    accuracy_label = LABEL_FONT.render(f"Accuracy: {accuracy}%", 1, "blue")
+
+    text_name = LABEL_FONT.render(f"Made By Sidharth Dhiman", 1, "white")
+
+    text_github = LABEL_FONT.render(f"github.com/sidxdhiman/aim-trainer", 1, "white")
 
     win.blit(time_label, (get_middle(time_label), 100))
     win.blit(speed_label, (get_middle(speed_label), 200))
     win.blit(hits_label, (get_middle(hits_label), 300))
     win.blit(accuracy_label, (get_middle(accuracy_label), 400))
+    win.blit(text_name, (get_middle(text_name), 500))
+    win.blit(text_github, (get_middle(text_github), 600))
 
     pygame.display.update()
 
